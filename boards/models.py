@@ -15,14 +15,14 @@ class Board(models.Model):
 
 #主题表
 class Topic(models.Model):
-    subject = models.CharField(max_length=255,verbose_name='主题内容')
+    subject = models.CharField(max_length=255,verbose_name='主题名称')
     last_updated = models.DateTimeField(auto_now_add=True,verbose_name='话题的排序') #auto_now_add= true 告诉django对象时间为当前时间
     board = models.ForeignKey(Board, related_name='topics',verbose_name='外键')#一个Topic实例涉及到board 实例
     starter = models.ForeignKey(User, related_name='topics',verbose_name='发起人')
 
 #帖子
 class Post(models.Model):
-    message = models.TextField(max_length=4000,verbose_name='内容')
+    message = models.TextField(max_length=4000,verbose_name='描述')
     topic = models.ForeignKey(Topic, related_name='posts',verbose_name='外键主题')
     created_at = models.DateTimeField(auto_now_add=True,verbose_name='创建时间')
     updated_at = models.DateTimeField(null=True,verbose_name='更新时间')

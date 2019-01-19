@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'',include('boards.urls',namespace='boards')),
 
     url(r'',include('books.urls', namespace='books')),
+
+    url(r'',include('accounts.urls',namespace='accounts'))
 ]

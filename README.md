@@ -1,6 +1,3 @@
-# haystack
-Django 学习案例
-
 django 初学者 案例
 
 
