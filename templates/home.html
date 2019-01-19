@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item active">板块</li>
+{% endblock %}
+
+{% block content %}
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">板块</th>
+            <th scope="col">帖子</th>
+            <th scope="col">主题</th>
+            <th scope="col">Last Post</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for board in boards %}
+            <tr>
+                <td>
+                    <a href="{% url 'boards:board_topics' board.pk %}">{{ board.name }}</a>
+                    <small class="text-muted d-block">{{ board.description }}</small>
+                </td>
+                <td class="align-middle">0</td>
+                <td class="align-middle">0</td>
+                <td></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
