@@ -137,3 +137,7 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_ROOT=os.path.join(BASE_DIR,"static_files/media")
+
+LOGOUT_REDIRECT_URL = 'boards:home'
+
+LOGIN_REDIRECT_URL = 'boards:home'

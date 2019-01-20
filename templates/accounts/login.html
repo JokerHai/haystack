@@ -12,19 +12,24 @@
       <a href="{% url 'boards:home' %}">Django Boards</a>
     </h1>
     <div class="row justify-content-center">
-      <div class="col-lg-8 col-md-10 col-sm-12">
+      <div class="col-lg-4 col-md-6 col-sm-8">
         <div class="card">
           <div class="card-body">
-            <h3 class="card-title">Sign up</h3>
+            <h3 class="card-title">Log in</h3>
             <form method="post" novalidate>
               {% csrf_token %}
               {% include 'includes/form.html' %}
-              <button type="submit" class="btn btn-primary btn-block">注册账号</button>
+              <button type="submit" class="btn btn-primary btn-block">登录</button>
             </form>
           </div>
           <div class="card-footer text-muted text-center">
-            已经有账号了吗？ <a href="{% url 'accounts:login' %}">登录</a>
+            注册新账号? <a href="{% url 'accounts:signup' %}">注册</a>
           </div>
+        </div>
+        <div class="text-center py-2">
+          <small>
+            <a href="#" class="text-muted">忘记密码?</a>
+          </small>
         </div>
       </div>
     </div>
