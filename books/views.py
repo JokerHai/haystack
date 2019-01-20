@@ -1,18 +1,43 @@
-# Create your views here.
-import json
+# -*- coding: utf-8 -*-
+#使ApiView改写RestApi接口
+# @Author  : joker
+"""
+    DRF ApiView 详解：
 
-from django.http import HttpResponse
+    什么是DRF APIView
+
+    DRF ApiView 是view类的子类，在View类的基础上添加了一些额外的功能
+
+
+    DRF框架ApiView都有哪些功能
+
+    1:视图中request对象不再是django原始的
+        HttpRequest类的对象，而是有DRF框架封装成的Request类的对象
+    2:相应时可以统一返回request类的对象
+
+    3:异常处理 如果视图中抛出了未处理异常，DRF框架会自动对异常进行处理，并且把处理之后的错误信息返回给客户端
+
+    Request类的对象 由 request.data 获取，参数由request.query.params
+
+
+    Response类的对象， 传入原始的响应数据，会自动根据客户的请求头中`Accept`将响应数据转换为对应的格式进行返回，默认返回json，仅支持json和html
+
+"""
+# @Date    : 2019-01-18
+
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
-from django.views import View
-from rest_framework.generics import GenericAPIView
-from rest_framework.viewsets import ModelViewSet
+
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 
 from books.models import BookInfo
 from books.serializers import BookInfoSerialize
 
 
-class BookListView(GenericAPIView):
+class BookListView(APIView):
 
     #查询所有的图书
     def get(self,request):
@@ -20,15 +45,13 @@ class BookListView(GenericAPIView):
 
         serializer = BookInfoSerialize(queryset,many=True)
 
-        return JsonResponse(serializer.data,safe = False)
+        return Response(serializer.data)
     #新增图书
     def post(self,request):
-        #获取json的原始数据
-        request_dict = json.loads(request.body.decode())
 
         #反序列-数据校验
 
-        un_serializer = BookInfoSerialize(data=request_dict)
+        un_serializer = BookInfoSerialize(data=request.data)
 
         un_serializer.is_valid(raise_exception=True) #校验失败直接报错
 
@@ -36,9 +59,9 @@ class BookListView(GenericAPIView):
 
         un_serializer.save()
 
-        return JsonResponse(un_serializer.data,status=201)
+        return JsonResponse(un_serializer.data,status=status.HTTP_201_CREATED)
 
-class BookDetailView(View):
+class BookDetailView(APIView):
 
     #查看单个图书信息
 
@@ -48,19 +71,16 @@ class BookDetailView(View):
 
         serializer = BookInfoSerialize(books)
 
-        return JsonResponse(serializer.data)
+        return Response(serializer.data)
 
     #修改图书信息
     def put(self,request,pk):
-
-        #获取json数据
-        request_dict = json.loads(request.body.decode())
 
         #获取books 实例
         books = get_object_or_404(BookInfo,pk)
 
         #反序列-数据效验
-        un_serializer = BookInfoSerialize(books,request_dict)
+        un_serializer = BookInfoSerialize(books,request.data)
 
         #数据保存
         un_serializer.save()
@@ -74,10 +94,4 @@ class BookDetailView(View):
 
         books.delete()
 
-        return HttpResponse(status = 204)
-
-class BookInfoViewSet(ModelViewSet):
-
-    queryset = BookInfo.objects.all()
-
-    serializer_class = BookInfoSerialize
+        return Response(status = status.HTTP_204_NO_CONTENT)
