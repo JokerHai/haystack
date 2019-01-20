@@ -5,12 +5,14 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
+from rest_framework.generics import GenericAPIView
 from rest_framework.viewsets import ModelViewSet
 
 from books.models import BookInfo
 from books.serializers import BookInfoSerialize
 
-class BookListView(View):
+
+class BookListView(GenericAPIView):
 
     #查询所有的图书
     def get(self,request):
