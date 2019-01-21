@@ -28,29 +28,22 @@
 # @Date    : 2019-01-18
 
 from django.http import JsonResponse
-
+from django.shortcuts import get_object_or_404
 
 from rest_framework import status
-from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
-
+from rest_framework.views import APIView
 
 
 from books.models import BookInfo
 from books.serializers import BookInfoSerialize
 
 
-class BookListView(GenericAPIView):
-
-    #指定当前视图所使用的序列化器类
-    serializer_class = BookInfoSerialize
-
-    queryset = BookInfo.objects.all()
+class BookListView(APIView):
 
     #查询所有的图书
     def get(self,request):
-
-        queryset = self.get_queryset() #QuerySet
+        queryset = BookInfo.objects.all()
 
         serializer = BookInfoSerialize(queryset,many=True)
 
@@ -68,21 +61,17 @@ class BookListView(GenericAPIView):
 
         un_serializer.save()
 
-        return Response(un_serializer.data,status=status.HTTP_201_CREATED)
+        return JsonResponse(un_serializer.data,status=status.HTTP_201_CREATED)
 
-class BookDetailView(GenericAPIView):
-
-    serializer_class = BookInfoSerialize
-
-    queryset = BookInfo.objects.all()
+class BookDetailView(APIView):
 
     #查看单个图书信息
 
     def get(self,request,pk):
 
-        books = self.get_object()
+        books = get_object_or_404(BookInfo,pk)
 
-        serializer = self.get_serializer(books)
+        serializer = BookInfoSerialize(books)
 
         return Response(serializer.data)
 
@@ -90,20 +79,20 @@ class BookDetailView(GenericAPIView):
     def put(self,request,pk):
 
         #获取books 实例
-        books = self.get_object()
+        books = get_object_or_404(BookInfo,pk)
 
         #反序列-数据效验
-        un_serializer = self.get_serializer(books,request.data)
+        un_serializer = BookInfoSerialize(books,request.data)
 
         #数据保存
         un_serializer.save()
 
-        return Response(un_serializer.data)
+        return JsonResponse(un_serializer.data)
 
     #删除图书信息
     def delete(self,request,pk):
 
-        books = self.get_object()
+        books = get_object_or_404(BookInfo,pk)
 
         books.delete()
 
