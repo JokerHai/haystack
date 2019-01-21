@@ -27,19 +27,19 @@ DRF框架学习总结
 
 APIView：View类的子类，在View类的基础上添加了一些功能。
 
-​	1）request对象是由DRF框架封装成Request类的对象。
+	​	1）request对象是由DRF框架封装成Request类的对象。
 
-​	request.data：解析之后的请求体的数据。request.body|request.POST|request.FILES
+	​	request.data：解析之后的请求体的数据。request.body|request.POST|request.FILES
 
-​	request.query_params：解析之后的查询字符串的数据。
+	​	request.query_params：解析之后的查询字符串的数据。
 
-​	2）响应可以统一返回Response的对象。
+	​	2）响应可以统一返回Response的对象。
 
-​		Accept json html
+	​		Accept json html
 
-​	3）异常。
+	​	3）异常。
 
-​	4）高级功能：认证 权限 限流
+	​	4）高级功能：认证 权限 限流
 
 ​
 
@@ -47,23 +47,23 @@ GenericAPIView：APIView类的子类，在APIView类的基础上添加操作序�
 
 操作序列化器：
 
-​	属性：serializer_class：指定视图所使用的序列化器类
+	​	属性：serializer_class：指定视图所使用的序列化器类
 
-​	方法：
+	​	方法：
 
-​		get_serializer_class：返回视图所使用的序列化器类
+	​		get_serializer_class：返回视图所使用的序列化器类
 
-​		get_serializer：创建序列化器类的对象
+	​		get_serializer：创建序列化器类的对象
 
 数据库查询：
 
-​	属性：queryset：指定视图所使用的查询集。
+	​	属性：queryset：指定视图所使用的查询集。
 
-​	方法：
+	​	方法：
 
-​		get_queryset：获取视图所使用的查询集。
+	​		get_queryset：获取视图所使用的查询集。
 
-​		get_object：从视图所使用的查询集中获取指定的对象，默认根据pk进行查询。
+	​		get_object：从视图所使用的查询集中获取指定的对象，默认根据pk进行查询。
 
 
 
