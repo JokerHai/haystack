@@ -259,22 +259,39 @@ GenericAPIView：APIView类子类
 
 Mixin扩展类：5个
 
-	​	ListModelMixin： list
+	​	ListModelMixin： 提供了一个list方法，封装获取一组数据的通用流程
 
-	​	CreateModelMixin：create
+	​	CreateModelMixin：提供了一个create方法，封装了新增一条数据的通用流程
 
-	​	RetrieveModelMixin：retrieve
+	​	RetrieveModelMixin：提供了一个retrieve方法，封装了获取指定数据的通用流程
 
-	​	UpdateModelMixin：update
+	​	UpdateModelMixin：提供了一个update方法，封装了更新指定数据的通用流程
 
-	​	DestroyModelMixin：destroy
+	​	DestroyModelMixin：提供了一个destroy方法(删除),封装了一个指定删除数据的指定流程
 
 
 
 子类视图：9个
 
-	​	ListCreateAPIView：	GenericAPIView，ListModelMixin，CreateModelMixin，get， post
+	​	ListApiView 继承了ListModelMixin和 Generic [dʒə'nɛrɪk]ApiView，同时提供了get方法
 
+        CreateApiView 继承自CreateModelMixin和 GenericApiView,同时提供了post方法
+
+        Retrieve[rɪ'triv]ApiView 继承自RetrieveModelMixin和GenericApiView，同时提供了get方法
+
+        UpdateApiView 继承自UpdateModelMixin和GenericApiView同时提供了put方法
+
+        DestroyApiView 继承DestroyApiModelMixin和GenericApiView同时提供了delete方法
+
+        ListCreateApiView 继承自ListModelMixin 和CreateModelMixin 和GenericApiView，同时提供了get,post 方法
+
+
+        RetrieveUpdateApiView 继承自RetrieveMixin UpdateMixin和GenericApiView,同时提供了get put patch 方法
+
+        RetrieveDestroyApiView 继承自RetrieveModelMixin DestroyModelMixin GenericApiView 同时提供了get delete方法
+
+        RetrieveUpdateDestroyApiView 继承自RetrieveModelMixin UpdateModelMixin DestroyModelMixin GenericApiView 同时提供了
+                                     get put patch delete 方法
 
 
 ##### 视图集
