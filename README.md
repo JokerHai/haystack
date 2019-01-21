@@ -29,9 +29,9 @@ APIView：View类的子类，在View类的基础上添加了一些功能。
 
 	​	1）request对象是由DRF框架封装成Request类的对象。
 
-	​	request.data：解析之后的请求体的数据。request.body|request.POST|request.FILES
+		​	request.data：解析之后的请求体的数据。request.body|request.POST|request.FILES
 
-	​	request.query_params：解析之后的查询字符串的数据。
+		​	request.query_params：解析之后的查询字符串的数据。
 
 	​	2）响应可以统一返回Response的对象。
 
