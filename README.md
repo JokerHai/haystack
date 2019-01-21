@@ -217,17 +217,17 @@ GenericAPIView：APIView类的子类，在APIView类的基础上添加操作序�
 
 APIView：
 
-​	1）request对象是Request类的对象
+	​	1）request对象是Request类的对象
 
-​		request.data：解析之后请求体的数据。request.body, request.POST, request.FILES
+	​		request.data：解析之后请求体的数据。request.body, request.POST, request.FILES
 
-​		request.query_params: 解析之后的查询字符串数据。
+	​		request.query_params: 解析之后的查询字符串数据。
 
-​	2）统一返回Response对象
+	​	2）统一返回Response对象
 
-​	3）异常处理
+	​	3）异常处理
 
-​	4）高级功能：认证 权限 限流
+	​	4）高级功能：认证 权限 限流
 
 
 
@@ -235,23 +235,23 @@ GenericAPIView：APIView类子类
 
 操作序列化器：
 
-​	属性：serializer_class：指定当前视图所使用的序列化器类
+	​	属性：serializer_class：指定当前视图所使用的序列化器类
 
-​	方法：
+	​	方法：
 
-​			get_serializer_class：返回当前视图所使用的序列化器类
+	​			get_serializer_class：返回当前视图所使用的序列化器类
 
-​			get_serializer：创建一个视图所使用的序列化器类的对象
+	​			get_serializer：创建一个视图所使用的序列化器类的对象
 
 数据库查询：
 
-​	属性：queryset：指定当前视图所使用的查询集
+	​	属性：queryset：指定当前视图所使用的查询集
 
-​	方法：
+	​	方法：
 
-​		get_queryset：获取当前视图所使用的查询集
+	​		get_queryset：获取当前视图所使用的查询集
 
-​		get_object：从查询集中查询指定的对象，默认根据pk进行查询
+	​		get_object：从查询集中查询指定的对象，默认根据pk进行查询
 
 其他功能：过滤 分页
 
@@ -259,21 +259,21 @@ GenericAPIView：APIView类子类
 
 Mixin扩展类：5个
 
-​	ListModelMixin： list
+	​	ListModelMixin： list
 
-​	CreateModelMixin：create
+	​	CreateModelMixin：create
 
-​	RetrieveModelMixin：retrieve
+	​	RetrieveModelMixin：retrieve
 
-​	UpdateModelMixin：update
+	​	UpdateModelMixin：update
 
-​	DestroyModelMixin：destroy
+	​	DestroyModelMixin：destroy
 
 
 
 子类视图：9个
 
-​	ListCreateAPIView：	GenericAPIView，ListModelMixin，CreateModelMixin，get， post
+	​	ListCreateAPIView：	GenericAPIView，ListModelMixin，CreateModelMixin，get， post
 
 
 
@@ -281,11 +281,11 @@ Mixin扩展类：5个
 
 1）视图集基本使用
 
-​	继承父类：ViewSet GenericViewSet ModelViewSet ReadOnlyModelViewSet
+	​	继承父类：ViewSet GenericViewSet ModelViewSet ReadOnlyModelViewSet
 
-​	视图集中处理函数以对应操作命名：list create retrieve update destroy
+	​	视图集中处理函数以对应操作命名：list create retrieve update destroy
 
-​	进行url地址配置时需要指明请求方式和视图集中处理函数之间的对应关系
+	​	进行url地址配置时需要指明请求方式和视图集中处理函数之间的对应关系
 
 2）在视图集中添加额外的处理方法
 
